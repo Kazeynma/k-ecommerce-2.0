@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Lorant | Acceuil</title>
+    <link rel="stylesheet" href="style/contactUs.css">
+</head>
+
+<body>
+    <header>
+        <%- include('../partials/header'); %>
+    </header>
+    <div id="#contact" class="content">
+        <div class="sidebar">
+            <h2>Vous rencontrez des problèmes ?</h2>
+            <img class="ask-img" src="../assets/ask.svg" alt="ask logo">
+            <p>Vous pouvez nous contacter via notre formulaire</p>
+        </div>
+        <div class="form-container">
+            <form action="/contact" method="post">
+                <div>
+                    <label>Votre nom :</label>
+                    <input class="input-form" type="text" id="name" name="name">
+
+                    <label>Votre email :</label>
+                    <input class="input-form" type="email" id="email" name="email">
+                </div>
+                <div class="input-container">
+                    <label>Le sujet :</label>
+                    <input class="input-form" type="text" id="subject" name="subject">
+                </div>
+                <div class="input-container">
+                    <label>Votre message :</label>
+                    <textarea id="message" name="message" rows="5"></textarea>
+                </div>
+                <button class="button-form" type="submit">Valider</button>
+            </form>
+        </div>
+    </div>
+    <footer>
+        <%- include('../partials/footer'); %>
+    </footer>
+</body>
+
+</html>

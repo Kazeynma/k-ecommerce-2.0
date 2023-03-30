@@ -1,0 +1,126 @@
+body {
+    margin: 0;
+}
+
+/*Header*/
+header {
+    background-color: #6A645A;
+    color: white;
+    padding: 10px
+}
+
+.title {
+    font-family: "cursive";
+    font-size: 50px;
+}
+
+nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 50px;
+    color: white;
+    font-weight: bolder;
+}
+
+li {
+    list-style-type: none;
+    font-size: larger;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+/*Content*/
+.content {
+    background-color: #E3CD88;
+    padding: 25px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.sidebar {
+    color: white;
+    text-align: center;
+}
+
+.ask-img {
+    width: 30rem;
+    height: 30rem;
+}
+
+.form-container {
+    border: 1px solid black;
+    padding: 5rem;
+    width: 50%;
+    border-radius: 2%;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+}
+
+.input-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.input-form {
+    padding: 0.5rem;
+    margin: 0.5rem;
+}
+
+textarea {
+    padding: 0.5rem;
+    margin: 0.5rem;
+}
+
+.button-form {
+    width: 20%;
+    color: black;
+}
+
+/*Footer*/
+footer {
+    background-color: #6A645A;
+    color: white;
+    padding: 10px
+}
+
+.title-footer {
+    font-family: "cursive";
+    font-size: 50px;
+    text-align: center;
+}
+
+.content-footer {
+    display: flex;
+    justify-content: space-around;
+    margin-top: -50px;
+}
+
+.icon {
+    width: 50px;
+    height: 50px;
+}
+
+.title-column {
+    font-size: x-large;
+}
+
+.newsletter {
+    display: flex;
+}
+
+.newsletter-input {
+    padding: 5px;
+    border-radius: 2%;
+}
+
+.newsletter-button {
+    padding: 5px
+}

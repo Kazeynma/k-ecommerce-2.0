@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <%- include('../partials/head'); %>
+</head>
+
+<body>
+    <!--utilisation de la balise header pour créer une entête-->
+    <header>
+        <%- include('../partials/header'); %>
+    </header>
+    <!--contenu du site web-->
+    <div class="container">
+        <div class="sidebar">
+            <p class="catch-phrase">Avec nous, vous pouvez vous sentir chez vous</p>
+            <h1>Découvrez nos plantes tropicales</h1>
+            <h3 class="catch-phrase">A l'intérieur ou à l'extérieur, c'est vous qui décidez</h3>
+            <button class="sidebar-link">Retrouvez nos inspirations ici</button>
+        </div>
+        <!--Caroussel de produit-->
+        <div class="card-container">
+            <!--Div card qui prends une img, un titre h3 et un texte prix-->
+
+            <% tropical.forEach((product)=> { %>
+                <div class="card">
+                    <img src="<%= product.img %>" alt="product">
+                    <h3>
+                        <%= product.name %>
+                    </h3>
+                    <p>
+                        <%=product.price %>€
+                    </p>
+                </div>
+                <% }) %>
+
+        </div>
+    </div>
+    <!--Introduction d'autres produits-->
+    <div class="second-container">
+        <!--Classe "second-sidebar" permet de faire une colonne-->
+        <div class="second-sidebar">
+            <h2 class="sidebar-text">Nous avons aussi un large choix de fleurs qui pourrons vous plaire</h2>
+            <div class="mini-card-container">
+                <div class="mini-card">
+                    <img class="mini-image" src="./assets/roses.jpeg" alt="roses">
+                    <p>Roses</p>
+                </div>
+                <div class="mini-card">
+                    <img class="mini-image" src="./assets/lilas.jpg" alt="pothos">
+                    <p>Lilas</p>
+                </div>
+                <div class="mini-card">
+                    <img class="mini-image" src="./assets/orchidée.jpg" alt="pothos">
+                    <p>Orchidée</p>
+                </div>
+                <div class="mini-card">
+                    <img class="mini-image" src="./assets/bouquet_fleur.jpg" alt="pothos">
+                    <p>Bouquet</p>
+                </div>
+            </div>
+            <button class="sidebar-link">Découvrez nos fleurs ici</button>
+            <h2 class="sidebar-text">...avec leur variante en fleurs séchées</h2>
+            <div class="mini-card-container">
+                <div class="mini-card">
+                    <img class="mini-image" src="./assets/roses_sechee.jpg" alt="roses">
+                    <p>Roses</p>
+                </div>
+                <div class="mini-card">
+                    <img class="mini-image" src="./assets/lilas_sechee.jpg" alt="pothos">
+                    <p>Lilas</p>
+                </div>
+                <div class="mini-card">
+                    <img class="mini-image" src="./assets/fleur_pampa.jpg" alt="pothos">
+                    <p>Fleur de pampa</p>
+                </div>
+                <div class="mini-card">
+                    <img class="mini-image" src="./assets/bouquet_sechee.jpg" alt="pothos">
+                    <p>Bouquet seché</p>
+                </div>
+            </div>
+            <button class="sidebar-link">Découvrez nos fleurs séchées ici</button>
+
+        </div>
+        <div class="second-sidebar">
+            <h3>Qu'est-ce que vous pouvez faire avec des fleurs ?</h3>
+            <section>
+                <img src="./assets/Blooming-cuate.svg">
+                <p>Les offrir ou simplement pour vous faire plaisir.</p>
+
+                <p>Certaines fleurs sont également comestible. Retrouvez toute la catégorie de fleurs comestible ici
+                    :
+                    <br>
+                    Nous proposons également des recettes !
+                </p>
+            </section>
+        </div>
+    </div>
+    <!--Footer-->
+    <footer>
+        <%- include('../partials/footer'); %>
+    </footer>
+</body>
+
+</html>
