@@ -1,25 +1,40 @@
 // load the things we need
 import express from "express";
+import session from "express-session";
 import bodyParser from "body-parser";
+import cookieParser from "cookie-parser";
 
 const app = express();
-
-// set the view engine to ejs
+//to have ejs
 app.set('view engine', 'ejs');
+//to import images and style for pages
 app.use(express.static('public'));
+//to send data
 app.use(bodyParser.urlencoded({ extended: true }))
-// use res.render to load up an ejs view file
+app.use(cookieParser())
+// to use express session for coockies
+app.use(session({
+    secret: 'keyboard cat',
+    saveUninitialized: true,
+    resave: true,
+    cookie: { secure: true, maxAge: (1000 * 60 * 60 * 24) }
+}))
+
+
 
 import { connection } from "./db/config.js";
 // index page
 app.get('/', function (req, res) {
+    if (req.session.cart === undefined) {
+        console.log("set session cart")
+        req.session.cart = []
+    }
     connection.query("SELECT * FROM product", (err, rows, fields) => {
         const tropicalArray = []
         const flowerArray = []
         const driedFlowerArray = []
         rows.forEach((product) => {
             if (product.category === "tropical") {
-                console.log("oui", product)
                 tropicalArray.push(product)
             } else if (product.category === "flower") {
                 flowerArray.push(product)
@@ -27,6 +42,7 @@ app.get('/', function (req, res) {
                 driedFlowerArray.push(product)
             }
         })
+
 
         res.render('pages/index', {
             tropical: tropicalArray,
@@ -49,7 +65,6 @@ app.get('/products', function (req, res) {
         const driedFlowerArray = []
         rows.forEach((product) => {
             if (product.category === "tropical") {
-                console.log("oui", product)
                 tropicalArray.push(product)
             } else if (product.category === "flower") {
                 flowerArray.push(product)
@@ -57,7 +72,6 @@ app.get('/products', function (req, res) {
                 driedFlowerArray.push(product)
             }
         })
-
         res.render('pages/productPage', {
             tropical: tropicalArray,
             flower: flowerArray,
@@ -68,7 +82,6 @@ app.get('/products', function (req, res) {
 
 //cart page
 app.get('/cart', function (req, res) {
-    console.log(req.body)
     res.render('pages/cart')
 })
 
@@ -79,7 +92,6 @@ app.get('/contact/sent', (req, res) => {
 
 //POST
 app.post('/contact', (req, res) => {
-    console.log(req.body)
     const name = req.body.name
     const email = req.body.email
     const subject = req.body.subject
@@ -92,17 +104,15 @@ app.post('/contact', (req, res) => {
 
 //permet d'ajouter un produit dans la panier en utilisant son id et l'id de l'utilisateur enregistré en cookie
 app.post('/cart', (req, res) => {
-    console.log(req.body)
-    const product = req.body.idProduct
-    console.log(product)
-    const sql = "INSERT INTO orders SET client_name = ?,  idProduct = ?"
-    connection.query(sql, ["bob", parseInt(product)], (err, rows, fields) => {
-        if (err) {
-            console.log(err)
-        }
-        //Pour éviter que la page recharge indéfiniement et recharger les données
-        res.redirect('/products')
-    })
+    console.log("test session why undefined", req.session.cart)
+    console.log("test session why undefined", req.session)
+    // const product = req.body.idProduct
+    // console.log(product)
+    // req.session.cart.push(product)
+    // console.log(req.session)
+    res.redirect('/products')
+
+
 })
 
 app.listen(5000);
