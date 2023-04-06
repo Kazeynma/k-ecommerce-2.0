@@ -59,7 +59,8 @@
         <h2 style="color:white">Nos fleurs</h2>
         <div id="flowers" class="second-card-container">
             <% flower.forEach((product)=> { %>
-                <div class="second-card">
+                <form class="second-card" action="/cart" method="post">
+                    <input type="hidden" name="idProduct" value="<%=product.id%>">
                     <img class="second-card-image" src="<%=product.img%>" alt="product">
                     <p>
                         <%=product.name%>
@@ -67,8 +68,8 @@
                     <p>
                         <%=product.price%>€ l'unité
                     </p>
-                    <button>Ajouter au panier</button>
-                </div>
+                    <button type="submit">Ajouter au panier</button>
+                </form>
                 <% }) %>
         </div>
     </div>

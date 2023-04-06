@@ -1,0 +1,110 @@
+body {
+    margin: 0;
+}
+
+/*Header*/
+header {
+    background-color: #6A645A;
+    color: white;
+    padding: 10px
+}
+
+.title {
+    font-family: "cursive";
+    font-size: 50px;
+}
+
+nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 50px;
+    color: white;
+    font-weight: bolder;
+}
+
+li {
+    list-style-type: none;
+    font-size: larger;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+/*Content*/
+.container {
+    padding: 5px;
+    display: flex;
+    gap: 90px;
+    align-items: center;
+}
+
+.cart-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.img {
+    width: 20%;
+}
+
+.category {
+    font-style: italic;
+    color: grey;
+}
+
+.main-content {
+    width: 60%;
+}
+
+.client {}
+
+.client-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px
+}
+
+/*Footer*/
+footer {
+    background-color: #6A645A;
+    color: white;
+    padding: 10px
+}
+
+.title-footer {
+    font-family: "cursive";
+    font-size: 50px;
+    text-align: center;
+}
+
+.content-footer {
+    display: flex;
+    justify-content: space-around;
+    margin-top: -50px;
+}
+
+.icon {
+    width: 50px;
+    height: 50px;
+}
+
+.title-column {
+    font-size: x-large;
+}
+
+.newsletter {
+    display: flex;
+}
+
+.newsletter-input {
+    padding: 5px;
+    border-radius: 2%;
+}
+
+.newsletter-button {
+    padding: 5px
+}

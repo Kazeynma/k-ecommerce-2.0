@@ -17,16 +17,20 @@ app.use(session({
     secret: 'keyboard cat',
     saveUninitialized: true,
     resave: true,
-    cookie: { secure: true, maxAge: (1000 * 60 * 60 * 24) }
+    cookie: { maxAge: (1000 * 60 * 60 * 24) }
 }))
 
 
 
 import { connection } from "./db/config.js";
+
+//import function
+import { clientFunction } from "./db/clients/fonctions.js";
+import { productsFonction } from "./db/produits/fonctions.js";
+
 // index page
 app.get('/', function (req, res) {
-    if (req.session.cart === undefined) {
-        console.log("set session cart")
+    if (!req.session.cart) {
         req.session.cart = []
     }
     connection.query("SELECT * FROM product", (err, rows, fields) => {
@@ -43,7 +47,6 @@ app.get('/', function (req, res) {
             }
         })
 
-
         res.render('pages/index', {
             tropical: tropicalArray,
             flower: flowerArray,
@@ -59,6 +62,8 @@ app.get('/contact', function (req, res) {
 
 // products page
 app.get('/products', function (req, res) {
+    console.log(req.session)
+    console.log(req.session.cart)
     connection.query("SELECT * FROM product", (err, rows, fields) => {
         const tropicalArray = []
         const flowerArray = []
@@ -82,7 +87,9 @@ app.get('/products', function (req, res) {
 
 //cart page
 app.get('/cart', function (req, res) {
-    res.render('pages/cart')
+    res.render('pages/cart', {
+        cart: req.session.cart || []
+    })
 })
 
 //message send page
@@ -103,17 +110,60 @@ app.post('/contact', (req, res) => {
 })
 
 //permet d'ajouter un produit dans la panier en utilisant son id et l'id de l'utilisateur enregistré en cookie
-app.post('/cart', (req, res) => {
-    console.log("test session why undefined", req.session.cart)
-    console.log("test session why undefined", req.session)
-    // const product = req.body.idProduct
-    // console.log(product)
-    // req.session.cart.push(product)
-    // console.log(req.session)
-    res.redirect('/products')
+app.post('/cart', async (req, res) => {
+    console.log("cart 1 : ", req.session.cart)
+    let cart
+    if (!req.session.cart) {
+        cart = []
+    } else {
+        cart = req.session.cart
+    }
 
+    let result = await productsFonction.getProductWithId(req.body.idProduct)
+    cart.push(result[0])
+    req.session.cart = cart
+    console.log("cart : ", cart)
+    res.render('pages/cart', {
+        cart: req.session.cart
+    })
+})
+
+//permet de retirer des éléments du panier (efface de temps en temps tous le panier)
+app.post('/cart/delete', (req, res) => {
+    let cart = req.session.cart
+
+    let newCart = cart.slice(req.body.idProduct)
+    console.log("new array", newCart)
+    req.session.cart = newCart
+
+    res.redirect("/cart")
+})
+
+//permet d'ajouter la commande dans une base de données 
+app.post('/cart/add', async (req, res) => {
+    const cart = req.session.cart
+    console.log("/cart/add")
+    const client = await clientFunction.getClientWithEmail(req.body.email)
+
+    console.log("boop", client)
+    if (!cart) {
+        res.redirect("/products")
+    }
+    if (client.length === 0) {
+        let newClient = await clientFunction.addClient(req.body)
+        cart.forEach((product) => {
+            productsFonction.addOrder(newClient.insertId, product.id)
+        })
+    } else {
+        cart.forEach((product) => {
+            productsFonction.addOrder(client[0].id, product.id)
+        })
+    }
 
 })
+
+
+
 
 app.listen(5000);
 console.log('5000 is the magic port');

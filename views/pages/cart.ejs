@@ -9,8 +9,58 @@
     <header>
         <%- include('../partials/header'); %>
     </header>
-    <div>
-        <p>Voici votre panier</p>
+    <div class="container">
+        <div class="main-content">
+            <h2>Voici votre panier</h2>
+            <hr>
+            <% if (cart.length !==0) {%>
+                <%cart.forEach((product, index)=> { %>
+                    <form class="cart-container" action="/cart/delete" method="post">
+                        <input type="hidden" name="idProduct" value="<%=product.id%>">
+                        <img class="img" src="<%=product.img%>">
+                        <div class="labels">
+                            <p>
+                                <%=product.name%>
+                            </p>
+                            <p class="category">
+                                <%=product.category%>
+                            </p>
+                        </div>
+                        <p>
+                            <%=product.price%>€
+                        </p>
+                        <button>Supprimer</button>
+                    </form>
+                    <%})%>
+                        <% } else {%>
+                            <p>Votre panier est vide :)</p>
+                            <% }%>
+        </div>
+        <div class="client">
+            <!--Permet d'afficher le formulaire du contrat que si on a un cart rempli-->
+            <%if (cart.length !==0) {%>
+                <form class="client-form" action="/cart/add" method="post">
+                    <label>Votre nom : </label>
+                    <input id="lastname" name="lastname">
+
+                    <label>Votre prénom : </label>
+                    <input id="firstname" name="firstname">
+
+                    <label>Votre email : </label>
+                    <input id="email" name="email" type="email">
+
+                    <label>Votre adresse : </label>
+                    <input id="adress" name="adress">
+
+                    <label>Votre code postal : </label>
+                    <input id="zipCode" name="zipCode">
+
+                    <button>Valider le panier</button>
+                </form>
+                <%}%>
+
+        </div>
+
     </div>
     <footer>
         <%- include('../partials/footer'); %>
