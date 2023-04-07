@@ -7,9 +7,9 @@ const getProductWithId = async (id) => {
 }
 
 //permet d'ajouter une commande
-const addOrder = async (idClient, idProduct) => {
-    const sql = "INSERT INTO orders SET idClient = ?, idProduct = ?"
-    const [rows, fields] = await promisePool.query(sql, [idClient, idProduct])
+const addOrder = async (sessionId, idClient, idProduct) => {
+    const sql = "INSERT INTO orders SET id = ?, idClient = ?, idProduct = ?"
+    const [rows, fields] = await promisePool.query(sql, [sessionId, idClient, idProduct])
     return rows
 }
 

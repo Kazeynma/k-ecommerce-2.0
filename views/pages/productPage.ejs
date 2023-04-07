@@ -23,14 +23,6 @@
                         <p>Fleurs</p>
                     </div>
             </div>
-            <a href="#plants">
-                <div class="card">
-                    <img src="/img/cat-plants.jpg" alt="image categorie plantes">
-                    <div class="overlay">
-                        <p>Plantes</p>
-                    </div>
-                </div>
-            </a>
             <div class="card">
                 <a href="#bouquets">
                     <img src="/img/cat-bouquets.jpg" alt="image categorie bouquet">
@@ -39,6 +31,14 @@
                     </div>
                 </a>
             </div>
+            <a href="#plants">
+                <div class="card">
+                    <img src="/img/cat-plants.jpg" alt="image categorie plantes">
+                    <div class="overlay">
+                        <p>Plantes</p>
+                    </div>
+                </div>
+            </a>
             <div class="card">
                 <a href="#seeds">
                     <img src="/img/cat-seeds.jpg" alt="image categorie graine et bulbes">
@@ -73,6 +73,24 @@
                 <% }) %>
         </div>
     </div>
+    <div id="bouquets" class="second-container">
+        <h2 style="color:white">Nos bouquets</h2>
+        <div class="second-card-container">
+            <% bouquet.forEach((product)=> { %>
+                <form class="second-card" action="/cart" method="post">
+                    <input type="hidden" name="idProduct" value="<%=product.id%>">
+                    <img class="second-card-image" src="<%=product.img%>" alt="product">
+                    <p>
+                        <%=product.name%>
+                    </p>
+                    <p>
+                        <%=product.price%>€ l'unité
+                    </p>
+                    <button type="submit">Ajouter au panier</button>
+                </form>
+                <% }) %>
+        </div>
+    </div>
     <div id="plants" class="second-container">
         <h2 style="color:white">Nos plantes</h2>
         <div class="second-card-container">
@@ -84,44 +102,28 @@
                         <%=product.name%>
                     </p>
                     <p>
-                        <%=product.price%>€
+                        <%=product.price%>€ l'unité
                     </p>
                     <button type="submit">Ajouter au panier</button>
                 </form>
                 <% }) %>
         </div>
     </div>
-    <div id="bouquets" class="second-container">
-        <h2 style="color:white">Nos bouquets</h2>
-        <div class="second-card-container">
-            <% tropical.forEach((product)=> { %>
-                <div class="second-card">
-                    <img class="second-card-image" src="<%=product.img%>" alt="product">
-                    <p>
-                        <%=product.name%>
-                    </p>
-                    <p>
-                        <%=product.price%>€
-                    </p>
-                    <button>Ajouter au panier</button>
-                </div>
-                <% }) %>
-        </div>
-    </div>
     <div id="seeds" class="second-container">
         <h2 style="color:white">Nos graines & bulbes</h2>
         <div class="second-card-container">
-            <% tropical.forEach((product)=> { %>
-                <div class="second-card">
+            <% seeds.forEach((product)=> { %>
+                <form class="second-card" action="/cart" method="post">
+                    <input type="hidden" name="idProduct" value="<%=product.id%>">
                     <img class="second-card-image" src="<%=product.img%>" alt="product">
                     <p>
                         <%=product.name%>
                     </p>
                     <p>
-                        <%=product.price%>€
+                        <%=product.price%>€ l'unité
                     </p>
-                    <button>Ajouter au panier</button>
-                </div>
+                    <button type="submit">Ajouter au panier</button>
+                </form>
                 <% }) %>
         </div>
     </div>

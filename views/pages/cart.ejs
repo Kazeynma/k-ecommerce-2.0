@@ -11,14 +11,20 @@
     </header>
     <div class="container">
         <div class="main-content">
-            <h2>Voici votre panier</h2>
+            <div class="cart-title">
+                <h2>Voici votre panier</h2>
+                <p>
+                    <%=cartTotal%>€
+                </p>
+            </div>
+
             <hr>
             <% if (cart.length !==0) {%>
                 <%cart.forEach((product, index)=> { %>
                     <form class="cart-container" action="/cart/delete" method="post">
                         <input type="hidden" name="idProduct" value="<%=product.id%>">
                         <img class="img" src="<%=product.img%>">
-                        <div class="labels">
+                        <div class="item-grid">
                             <p>
                                 <%=product.name%>
                             </p>
@@ -26,11 +32,13 @@
                                 <%=product.category%>
                             </p>
                         </div>
-                        <p>
+                        <p class="item-grid">
                             <%=product.price%>€
                         </p>
-                        <button>Supprimer</button>
+                        <button class="item-grid-button">Supprimer</button>
+
                     </form>
+                    <hr class="divider">
                     <%})%>
                         <% } else {%>
                             <p>Votre panier est vide :)</p>
@@ -41,19 +49,19 @@
             <%if (cart.length !==0) {%>
                 <form class="client-form" action="/cart/add" method="post">
                     <label>Votre nom : </label>
-                    <input id="lastname" name="lastname">
+                    <input class="client-input" id="lastname" name="lastname">
 
                     <label>Votre prénom : </label>
-                    <input id="firstname" name="firstname">
+                    <input class="client-input" id="firstname" name="firstname">
 
                     <label>Votre email : </label>
-                    <input id="email" name="email" type="email">
+                    <input class="client-input" id="email" name="email" type="email">
 
                     <label>Votre adresse : </label>
-                    <input id="adress" name="adress">
+                    <input class="client-input" id="adress" name="adress">
 
                     <label>Votre code postal : </label>
-                    <input id="zipCode" name="zipCode">
+                    <input class="client-input" id="zipCode" name="zipCode">
 
                     <button>Valider le panier</button>
                 </form>
