@@ -42,24 +42,28 @@
         <div class="second-sidebar">
             <h2 class="sidebar-text">Nous avons aussi un large choix de fleurs qui pourrons vous plaire</h2>
             <div class="mini-card-container">
-                <div class="mini-card">
-                    <img class="mini-image" src="./assets/roses.jpeg" alt="roses">
-                    <p>Roses</p>
-                </div>
-                <div class="mini-card">
-                    <img class="mini-image" src="./assets/lilas.jpg" alt="pothos">
-                    <p>Lilas</p>
-                </div>
-                <div class="mini-card">
-                    <img class="mini-image" src="./assets/orchidée.jpg" alt="pothos">
-                    <p>Orchidée</p>
-                </div>
-                <div class="mini-card">
-                    <img class="mini-image" src="./assets/bouquet_fleur.jpg" alt="pothos">
-                    <p>Bouquet</p>
-                </div>
+                <% flower.forEach((product)=> {%>
+                    <div class="mini-card">
+                        <img class="mini-image" src="<%=product.img%>" alt="roses">
+                        <p>
+                            <%=product.name%>
+                        </p>
+                    </div>
+                    <%})%>
+
             </div>
-            <button class="sidebar-link">Découvrez nos fleurs ici</button>
+            <div class="mini-card-container">
+                <% flower.forEach((product)=> {%>
+                    <div class="mini-card">
+                        <img class="mini-image" src="<%=product.img%>" alt="roses">
+                        <p>
+                            <%=product.name%>
+                        </p>
+                    </div>
+                    <%})%>
+
+            </div>
+            <!-- <button class="sidebar-link">Découvrez nos fleurs ici</button>
             <h2 class="sidebar-text">...avec leur variante en fleurs séchées</h2>
             <div class="mini-card-container">
                 <div class="mini-card">
@@ -79,13 +83,13 @@
                     <p>Bouquet seché</p>
                 </div>
             </div>
-            <button class="sidebar-link">Découvrez nos fleurs séchées ici</button>
+            <button class="sidebar-link">Découvrez nos fleurs séchées ici</button> -->
 
         </div>
         <div class="second-sidebar">
             <h3>Qu'est-ce que vous pouvez faire avec des fleurs ?</h3>
             <section>
-                <img src="./assets/Blooming-cuate.svg">
+                <img src="/img/Blooming-cuate.svg">
                 <p>Les offrir ou simplement pour vous faire plaisir.</p>
 
                 <p>Certaines fleurs sont également comestible. Retrouvez toute la catégorie de fleurs comestible ici
